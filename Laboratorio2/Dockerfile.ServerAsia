@@ -1,0 +1,16 @@
+FROM golang:1.21.1
+
+WORKDIR /Asia
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY Asia/names.txt ./
+COPY Asia/main.go ./
+
+RUN go get github.com/MauricioCortesRo/Lab2_Proto
+
+RUN go build -o ServerAsia_bin .
+
+ENTRYPOINT [ "/Asia/ServerAsia_bin" ]

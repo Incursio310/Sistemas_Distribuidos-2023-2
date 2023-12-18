@@ -1,0 +1,18 @@
+FROM golang:1.21.1
+
+WORKDIR /DataNode/DataNode1
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY DataNode/DataNode1/DATA.txt ./DataNode/DataNode1
+COPY DataNode/DataNode1/main.go ./
+
+COPY DataNode/DataNode1/DATA.txt ./DataNode/DataNode1
+
+RUN go get github.com/MauricioCortesRo/Lab2_Proto
+
+RUN go build -o ServerDataNode1_bin .
+
+ENTRYPOINT [ "/DataNode/DataNode1/ServerDataNode1_bin" ]

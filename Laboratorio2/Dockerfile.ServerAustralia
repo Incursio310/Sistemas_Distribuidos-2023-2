@@ -1,0 +1,16 @@
+FROM golang:1.21.1
+
+WORKDIR /Australia
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY Australia/names.txt ./
+COPY Australia/main.go ./
+
+RUN go get github.com/MauricioCortesRo/Lab2_Proto
+
+RUN go build -o ServerAustralia_bin .
+
+ENTRYPOINT [ "/Australia/ServerAustralia_bin" ]

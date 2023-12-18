@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package = "github.com/MauricioCortesRo/Lab2_Proto/Proto";
+
+message NameNodeResponse {
+    string response = 1;
+}
+
+message Continent {
+    string name = 1;
+    string last_name = 2;
+    string status = 3;
+}
+
+message NameNodeRequest {
+    int64 ID = 1;
+    string name = 2;
+    string last_name = 3;
+}
+
+message DataNodeResponse {
+    string response = 1;
+}
+
+message NameNodeIDRequest {
+    repeated int64 ID = 1;
+}
+
+message DataNodeNamesResponse {
+    repeated string name = 1;
+    repeated string last_name = 2;
+}
+
+message ONURequest {
+    string status = 1;
+}
+
+message StatusResponse {
+    repeated string name = 1;
+    repeated string last_name = 2;
+}
+
+service Information_Trades {
+    rpc Notificate(Continent) returns (NameNodeResponse);
+    rpc Saves_Name(NameNodeRequest) returns (DataNodeResponse);
+    rpc Get_Name(NameNodeIDRequest) returns (DataNodeNamesResponse);
+    rpc ONU(ONURequest) returns (StatusResponse);
+}
+

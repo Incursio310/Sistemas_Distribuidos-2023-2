@@ -1,0 +1,15 @@
+FROM golang:1.21.1
+
+WORKDIR /ONU
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY ONU/main.go ./
+
+RUN go get github.com/MauricioCortesRo/Lab2_Proto
+
+RUN go build -o ServerOnu_bin .
+
+ENTRYPOINT [ "/ONU/ServerOnu_bin" ]
