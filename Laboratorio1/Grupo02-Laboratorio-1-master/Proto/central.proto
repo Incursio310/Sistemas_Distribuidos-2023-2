@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package="github.com/MauricioCortesRo/Laboratorio1/tree/master/Proto";
+
+message Request{
+    int64 a = 1;
+    int64 b = 2;
+}
+
+message Response{
+    int64 result = 1;
+}
+
+message CalculationRequest{
+    string requestId = 1;
+}
+
+message CalculationResponse{
+    Request request = 1;
+}
+
+message CreateRequest{
+    Request request = 1;
+    int64 requestId = 2;
+}
+
+message CreateResponse{
+    int64 requestId = 1;
+}
+
+message CreateAnnouncementRequest{
+    int64 AvalibleKeys = 1;
+}
+
+message CreateAnnouncementResponse{
+    bool status = 1;
+}
+
+message CreateUsersRequest{
+    int64 NonMatched = 1;
+}
+
+message CreateUsersResponse{
+    bool status = 1;
+}
+
+service CentralService {
+    rpc KeyReleaseAnnouncement(CreateAnnouncementRequest) returns (CreateAnnouncementResponse);
+    rpc NonMatchedUsers(CreateUsersRequest) returns (CreateUsersResponse);
+    rpc Create(CreateRequest) returns (CreateResponse);
+    rpc Calculate(Request) returns (Response);
+}

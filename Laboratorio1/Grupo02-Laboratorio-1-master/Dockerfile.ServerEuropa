@@ -1,0 +1,16 @@
+FROM golang:1.21.1
+
+WORKDIR /ServerEuropa
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY ServerEuropa/parametros_de_inicio.txt ./ServerEuropa/
+COPY ServerEuropa/main.go ./
+
+RUN go get github.com/MauricioCortesRo/Proto
+
+RUN go build -o ServerEuropa_bin .
+
+ENTRYPOINT [ "/ServerEuropa/ServerEuropa_bin" ]

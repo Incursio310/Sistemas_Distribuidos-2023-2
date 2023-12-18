@@ -1,0 +1,16 @@
+FROM golang:1.21.1
+
+WORKDIR /centralServer
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY centralServer/parametros_de_inicio.txt ./centralServer/
+COPY centralServer/main.go ./
+
+RUN go get github.com/MauricioCortesRo/Proto
+
+RUN go build -o centralServer_bin .
+
+ENTRYPOINT [ "/centralServer/centralServer_bin" ]
